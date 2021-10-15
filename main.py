@@ -18,7 +18,8 @@ print(stany_czujek)
 dzisiejsze_stany_czujek = stany_czujek.loc[stany_czujek["DATETIMES"] >= to_datetime(now)]
 #odfiltrowanie stanów czujek z sygnałem alarmowym
 dzisiejsze_stany_czujek_z_alarmem = dzisiejsze_stany_czujek.loc[dzisiejsze_stany_czujek["SVALUE"] == '2']
-
+print('dzisiejsze stany czujek z alarmem')
+print(dzisiejsze_stany_czujek_z_alarmem)
 #pobranie najnowszego wpisu w tabeli wywolanych alarmow
 wywolane_alarmy = DataFrame(wywolane_alarmy.popierz_najnowszy_wpis())
 #print(wywolane_alarmy["DATETIMES"])
