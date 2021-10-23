@@ -1,21 +1,44 @@
 import socket
-import time
-import pickle
+import threading
+
+HEADER = 64
+PORT = 5050
+SERVER = "192.168.2.6"
+#SERVER = socket.gethostbyname(socket.gethostname())
+ADDR = (SERVER, PORT)
+DISCONNECT_MESSAGE = "!DISCONNECT"
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(ADDR)
+
+def handle_client(conn, addr):
+    print(f"NEW CONNCETION] {addr} connected")
+
+    connected = True
+    while connected:
+        msg_length = conn.recv(HEADER).decode('utf8')
+        if msg_length:
+            msg_length = int(msg_length)
+            msg = conn.recv(msg_length).decode('utf8')
+            if msg == DISCONNECT_MESSAGE:
+                connected = False
+
+            print(f"[{addr}] {msg}")
+            conn.send("Alarm2".encode('utf-8'))
+
+    conn.close()
 
 
-HEADERSIZE = 10
+def start():
+    server.listen()
+    print(f"[LISTENING] Server is listening on {SERVER}")
+    while True:
+        conn, addr = server.accept()
+        thread = threading.Thread(target=handle_client, args=(conn, addr))
+        thread.start()
+        print(f"[ACTIVE CONNECTIONS] {threading.activeCount()-1}")
+    
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((socket.gethostname(), 1243))
-s.listen(5)
+print("[STARTING] server is starting...")
+start()
 
-while True:
-    # now our endpoint knows about the OTHER endpoint.
-    clientsocket, address = s.accept()
-    print(f"Connection from {address} has been established.")
-
-    d = {1:"hi", 2: "there"}
-    msg = pickle.dumps(d)
-    msg = bytes(f"{len(msg):<{HEADERSIZE}}", 'utf-8')+msg
-    print(msg)
-    clientsocket.send(msg)
