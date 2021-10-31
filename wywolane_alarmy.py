@@ -13,7 +13,7 @@ def pobierz_wywolane_alarmy():
     return stan_czujek
 
 
-def popierz_najnowszy_wpis():
+def pobierz_najnowszy_wpis():
     connection = psycopg2.connect(user="postgres",
                                     password="602696957Kd1",
                                     host="127.0.0.1",
@@ -25,4 +25,4 @@ def popierz_najnowszy_wpis():
 
 if __name__ == "__main__":
     print(pobierz_wywolane_alarmy())
-    print(popierz_najnowszy_wpis())
+    print(pobierz_najnowszy_wpis())

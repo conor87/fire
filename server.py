@@ -1,9 +1,10 @@
 import socket
 import threading
+from main import alarm
 
 HEADER = 64
 PORT = 5050
-SERVER = "192.168.2.6"
+SERVER = "10.1.176.133"
 #SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 DISCONNECT_MESSAGE = "!DISCONNECT"
@@ -11,8 +12,8 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
-def handle_client(conn, addr):
-    print(f"NEW CONNCETION] {addr} connected")
+def handle_client2(conn, addr):
+    print(f"[NEW CONNCETION] {addr} connected")
 
     connected = True
     while connected:
@@ -26,6 +27,17 @@ def handle_client(conn, addr):
             print(f"[{addr}] {msg}")
             conn.send("Alarm2".encode('utf-8'))
 
+    conn.close()
+
+def handle_client(conn, addr):
+    print(f"[NEW CONNCETION] {addr} connected")
+    #pobierz aktualny stan alarmu
+    czy_alarm = alarm()
+
+
+    connected = True
+    if connected:
+        conn.send(czy_alarm.encode('utf-8'))
     conn.close()
 
 
