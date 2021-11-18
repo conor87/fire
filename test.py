@@ -6,7 +6,7 @@ pygame.display.set_caption('Pygame Window')
 background = pygame.image.load("media/background.png") 
 rozmiar_zdjecia = background.get_rect().size
 
-img = pygame.image.load("media/fire.png") 
+img = pygame.image.load("media/R.gif") 
 WSIZE = (0, 0)
 screen = pygame.display.set_mode(WSIZE)
 W, H = screen.get_size()
@@ -17,7 +17,7 @@ skala = H / rozmiar_zdjecia[1]
 background = pygame.transform.scale(background, (rozmiar_zdjecia[0] * skala, H))
 # img = pygame.transform.scale(img, (200, 200))
 img = pygame.transform.scale(img, (236, 167))
-img.set_alpha(100)
+
 # screen.blit(background, [0, 0])
 screen.blit(background, [(W - rozmiar_zdjecia[0] * skala) / 2, 0])
 screen.blit(img, [W * 0.39, H * 0.55])
