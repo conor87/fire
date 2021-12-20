@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushButton
-from PySide6.QtGui import QScreen, QFont, QPixmap, QMovie
+from PySide6.QtGui import QScreen, QFont, QPixmap, QMovie, QImage
 import sys
 
 app = QApplication([])
@@ -13,30 +13,23 @@ class Window(QWidget):
   def __init__(self):
     super().__init__()
         
-    #self.setGeometry(0,0,frmX,frmY)
-    self.setGeometry(100,100,600,500)
+    self.setGeometry(0,0,frmX,frmY)
     self.setWindowTitle("Powiadomienie")
     
     layout = QVBoxLayout()
+
+    label4 = QLabel("zdjecie", self)
+    #zdj = QImage("media/narzedziownia.bmp")
+    pix = QPixmap("media/narzedziownia.bmp").scaledToWidth(1200)
+    label4.setPixmap(pix)
     
-    
-    label = QLabel("Hello World", self)
-    label.setText("Uwaga pożar: udaj się na miejsce alarmu")
-    label.move(100,100)
-    label.setFont(QFont("Arial", 22))
-    
-    '''
-    label2 = QLabel(self)
-    mapa = QPixmap("media/narzedziownia.bmp")
-    label2.setPixmap(mapa)
-    '''
-    layout.addWidget(label)
-    #layout.addWidget(label2)
     label3 = QLabel(self)
-    movie = QMovie('R.gif')
+    movie = QMovie("red_dot.gif")
+    movie.setSpeed(500)
     label3.setMovie(movie)
     movie.start()
     layout.addWidget(label3)
+    layout.addWidget(label4)
     layout.addWidget(QPushButton('right'))
     self.setLayout(layout)
     
