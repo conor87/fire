@@ -4,7 +4,7 @@ from main import alarm
 
 HEADER = 64
 PORT = 5050
-SERVER = "192.168.1.6"
+SERVER = "192.168.2.226"
 # SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 DISCONNECT_MESSAGE = "!DISCONNECT"
@@ -12,7 +12,7 @@ DISCONNECT_MESSAGE = "!DISCONNECT"
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
-
+'''
 def handle_client2(conn, addr):
     print(f"[NEW CONNCETION] {addr} connected")
 
@@ -29,7 +29,7 @@ def handle_client2(conn, addr):
             conn.send("Alarm2".encode('utf-8'))
 
     conn.close()
-
+'''
 
 def handle_client(conn, addr):
     print(f"[NEW CONNCETION] {addr} connected")

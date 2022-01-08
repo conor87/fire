@@ -1,5 +1,8 @@
 from time import sleep
 import socket
+from monit import Ui_MainWindow
+from PySide6 import QtCore, QtGui, QtWidgets
+import sys
 
 HEADER = 64
 PORT = 5050
@@ -32,6 +35,14 @@ def send():
     print(server_msg)
     if server_msg == 'alarm':
         print('Wszczynam')
+        #-----pojawienie się okan
+        app = QtWidgets.QApplication(sys.argv)
+        window = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(window)
+        window.show()
+        sys.exit(app.exec_())
+        #------
     else:
         print('Nie wszczynam')
     client.close()

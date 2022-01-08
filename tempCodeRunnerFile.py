@@ -1,1 +1,1 @@
-layout.addWidget(QPushButton('right'))
+'''
