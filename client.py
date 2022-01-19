@@ -35,7 +35,7 @@ def send():
     print(server_msg)
     if server_msg == 'alarm':
         print('Wszczynam')
-        #-----pojawienie się okan
+        #-----pojawienie się okna
         app = QtWidgets.QApplication(sys.argv)
         window = QtWidgets.QMainWindow()
         ui = Ui_MainWindow()
